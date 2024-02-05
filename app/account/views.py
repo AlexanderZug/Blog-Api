@@ -1,5 +1,5 @@
-from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
 from drf_spectacular.utils import extend_schema
+from rest_framework.generics import CreateAPIView
 
 from .models import User
 from .serializers import UserCreateSerializer
