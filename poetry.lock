@@ -294,6 +294,17 @@ files = [
 referencing = ">=0.31.0"
 
 [[package]]
+name = "mimesis"
+version = "14.0.0"
+description = "Mimesis: Fake Data Generator."
+optional = false
+python-versions = ">=3.10,<4.0"
+files = [
+    {file = "mimesis-14.0.0-py3-none-any.whl", hash = "sha256:464df13c7c7ca214fc0adbe1d7a217055a5df04d8075b6250965ed625da5882a"},
+    {file = "mimesis-14.0.0.tar.gz", hash = "sha256:37c4d9116c3be247f5180dfe63d2e1a9a0f3d950be5b0842c18e29a03c041198"},
+]
+
+[[package]]
 name = "mypy-extensions"
 version = "1.0.0"
 description = "Type system extensions for programs checked with the mypy type checker."
@@ -657,4 +668,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "1ff2556c9f2c35afdc7bfc032ff08e78910e5bc8469b006ef3c513e1e363fa77"
+content-hash = "68bea9b3c37e4364a2131bc0834fe529fe395c6dbd012621fe605e73fb464cdf"

@@ -12,6 +12,7 @@ drf-yasg = "^1.21.7"
 python-dotenv = "^1.0.1"
 drf-spectacular = "^0.27.1"
 django-grappelli = "^3.0.8"
+mimesis = "^14.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.1.1"
