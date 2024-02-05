@@ -7,9 +7,11 @@ load_dotenv(BASE_DIR.parent.parent / ".env")
 
 INSTALLED_APPS += ["drf_yasg", "rest_framework", "drf_spectacular"]
 
-FRONTEND_MODULES = ["api"]
+FRONTEND_MODULES = ["api", "blog", "account"]
 
 INSTALLED_APPS += FRONTEND_MODULES
+
+AUTH_USER_MODEL = 'account.User'
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "api/media/"
@@ -34,8 +36,8 @@ DATABASES = {
         "PORT": os.environ.get("DJANGO_DB_PORT", "5432"),
     }
 }
-PROJECT_NAME = "Template"
-PROJECT_DESCRIPTION = "Django Template"
+PROJECT_NAME = "Blog"
+PROJECT_DESCRIPTION = "Blog"
 API_INFO = {
     "title": f"{PROJECT_NAME} API",
     "description": f"API for {PROJECT_DESCRIPTION}",
@@ -44,7 +46,7 @@ API_INFO = {
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": [
