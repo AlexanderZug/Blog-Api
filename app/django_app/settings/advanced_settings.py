@@ -1,17 +1,23 @@
 import os
+
 from dotenv import load_dotenv
 
 from .settings import *
 
 load_dotenv(BASE_DIR.parent.parent / ".env")
 
-INSTALLED_APPS += ["drf_yasg", "rest_framework", "drf_spectacular"]
+INSTALLED_APPS += [
+    "drf_yasg",
+    "rest_framework",
+    "drf_spectacular",
+    "django_celery_beat",
+]
 
 FRONTEND_MODULES = ["api", "blog", "account"]
 
 INSTALLED_APPS += FRONTEND_MODULES
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = "account.User"
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "api/media/"
@@ -26,6 +32,12 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "secret_key")
 
 DEBUG = os.environ.get("DEBUG", True)
 ALLOWED_HOSTS = [os.environ.get("DJANGO_ALLOWED_HOSTS", "*")]
+
+# Celery Configuration Options
+CELERY_RESULT_BACKEND = "redis://redis:6379" + "/0"
+CELERY_BROKER_URL = "redis://redis:6379" + "/0"
+CELERY_CACHE_BACKEND = "default"
+
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "django.db.backends.sqlite3"),

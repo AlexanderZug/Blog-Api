@@ -9,4 +9,4 @@ COPY . /app
 RUN chown -R 1000:1000 /app
 EXPOSE 8000
 RUN chmod +x app/runner/*.sh
-ENTRYPOINT ./runner/django_run.sh
+ENTRYPOINT ./runner/django_run.sh & ./runner/celery.sh

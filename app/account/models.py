@@ -10,7 +10,7 @@ from django.db.models import Manager
 from django.utils import timezone
 
 try:
-    from blog.models import Blog, Subscription, ReadStatus
+    from blog.models import Blog, ReadStatus, Subscription
 except ImportError:
     pass
 
@@ -40,7 +40,7 @@ class VerifyToken(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name="verify_tokens",
-        verbose_name="пользователь",
+        verbose_name="Пользователь",
     )
     first_name = models.CharField(
         "имя",
@@ -54,10 +54,10 @@ class VerifyToken(models.Model):
         blank=True,
         null=True,
     )
-    email = models.EmailField("email", blank=True, null=True, unique=True)
-    token = models.PositiveIntegerField("токен")
-    uuid = models.UUIDField("uuid", default=uuid.uuid4)
-    activation_date = models.DateTimeField("дата деактивации", auto_now_add=True)
+    email = models.EmailField("Email", blank=True, null=True, unique=True)
+    token = models.PositiveIntegerField("Токен")
+    uuid = models.UUIDField("Uuid", default=uuid.uuid4)
+    activation_date = models.DateTimeField("Дата деактивации", auto_now_add=True)
 
     @property
     def email_expired(self) -> bool:
