@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .views import PostListView
+from .views import SubscriptionCreateView, SubscriptionDeleteView
 
 urlpatterns = [
-    path("", PostListView.as_view()),
+    path("subscribe/", SubscriptionCreateView.as_view()),
+    path("unsubscribe/<int:pk>/", SubscriptionDeleteView.as_view()),
 ]

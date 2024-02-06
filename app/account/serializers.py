@@ -1,6 +1,7 @@
 import uuid
 
 import mimesis
+from blog.models import Post, Subscription
 from rest_framework import serializers
 
 from .models import User, VerifyToken
@@ -74,6 +75,20 @@ class SignViewSerializer(serializers.ModelSerializer):
         fields = [
             "first_name",
             "last_name",
-            "image",
             "email",
         ]
+
+
+class UserSubscriptionSerializer(serializers.ModelSerializer):
+    author = serializers.CharField(source="blog.user.first_name")
+    blog = serializers.CharField(source="blog.title")
+
+    class Meta:
+        model = Subscription
+        fields = ["blog", "author"]
+
+
+class UserPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id", "title", "text", "created_at", "blog"]

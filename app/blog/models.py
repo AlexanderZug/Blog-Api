@@ -2,13 +2,13 @@ from __future__ import annotations
 
 from typing import Union
 
+from account.models import User
 from django.db import models
 from django.db.models import Manager
 
-from account.models import User
-
 
 class Blog(models.Model):
+    title = models.CharField("Заголовок", max_length=100)
     user = models.OneToOneField(
         User,
         verbose_name="Пользователь",
@@ -20,7 +20,7 @@ class Blog(models.Model):
     subscribers: Union[Subscription, Manager]
 
     def __str__(self):
-        return self.user.username
+        return self.title
 
     class Meta:
         verbose_name = "Блог"

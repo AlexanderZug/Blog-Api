@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import include, path
 from django.views.generic import RedirectView
 from drf_spectacular.views import (
     SpectacularAPIView,
@@ -15,7 +15,7 @@ urlpatterns = [
     path(
         "swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"
     ),
-    path("post/", include("blog.urls")),
+    path("blog/", include("blog.urls")),
     path("account/", include("account.urls")),
 ]
 

@@ -1,9 +1,11 @@
+from blog.models import Post
 from django.contrib.auth import login, logout
 from django.middleware.csrf import get_token
 from drf_spectacular.utils import OpenApiResponse, extend_schema
 from rest_framework import status
 from rest_framework.generics import (
     CreateAPIView,
+    ListAPIView,
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
@@ -12,11 +14,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import User, VerifyToken
+from .pagination import UserPostsPagination
 from .serializers import (
     LoginUserCreateSerializer,
     SignViewSerializer,
+    UserPostSerializer,
     UserRetrieveSerializer,
     UserSerializer,
+    UserSubscriptionSerializer,
     VerifyTokenCreateSerializer,
 )
 
@@ -154,3 +159,40 @@ class SignOutView(APIView):
     def get(self, request, *args, **kwargs):
         logout(self.request)
         return Response(status=status.HTTP_200_OK)
+
+
+class UserSubscriptionView(ListAPIView):
+    serializer_class = UserSubscriptionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return self.request.user.subscriptions.all()
+
+    @extend_schema(
+        summary="Retrieve [User:subscription]",
+        description="Retrieve user's subscriptions",
+        responses={200: UserSubscriptionSerializer},
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+
+class UserPostListView(ListAPIView):
+    serializer_class = UserPostSerializer
+    permission_classes = [IsAuthenticated]
+    pagination_class = UserPostsPagination
+
+    def get_queryset(self):
+        subscriptions = self.request.user.subscriptions.all()
+        posts = Post.objects.filter(blog__in=subscriptions.values("blog")).order_by(
+            "-created_at"
+        )
+        return posts[:500]
+
+    @extend_schema(
+        summary="Retrieve [User:subscription]",
+        description="Retrieve user's subscriptions",
+        responses={200: UserPostSerializer},
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)

@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "django_template"
+name = "Blog-API"
 version = "0.1.0"
-description = "Tamplate for django project"
+description = "Blog-API"
 authors = ["AlexanderZug <alexandertsygankov.unterwegs@gmail.com>"]
 
 [tool.poetry.dependencies]
