@@ -10,7 +10,7 @@ from django.db.models import Manager
 from django.utils import timezone
 
 try:
-    from blog.models import Blog, Subscription
+    from blog.models import Blog, Subscription, ReadStatus
 except ImportError:
     pass
 
@@ -25,6 +25,7 @@ class User(AbstractUser):
     blog: Union[Blog, Manager]
     subscriptions: Union[Subscription, Manager]
     verify_tokens: Union[VerifyToken, Manager]
+    read_statuses: Union[ReadStatus, Manager]
 
     def __str__(self):
         return self.first_name

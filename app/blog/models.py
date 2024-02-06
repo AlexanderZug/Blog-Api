@@ -37,6 +37,7 @@ class Post(models.Model):
         related_name="posts",
         on_delete=models.CASCADE,
     )
+    read_statuses: Union[ReadStatus, Manager]
 
     def __str__(self):
         return self.title
