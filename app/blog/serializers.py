@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Subscription
+from .models import ReadStatus, Subscription
 
 
 class SubscriptionCreateSerializer(serializers.ModelSerializer):
@@ -24,3 +24,18 @@ class SubscriptionDeleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
         fields = ["blog"]
+
+
+class ReadStatusCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReadStatus
+        fields = ["post"]
+
+    def create(self, validated_data):
+        read_status = ReadStatus.objects.filter(
+            user=self.context["request"].user,
+            post=validated_data.get("post"),
+        )
+        if read_status.exists():
+            raise serializers.ValidationError("You have already read this post")
+        return super().create(validated_data)

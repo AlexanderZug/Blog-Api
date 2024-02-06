@@ -8,7 +8,7 @@ from django.db.models import Manager
 
 
 class Blog(models.Model):
-    title = models.CharField("Заголовок", max_length=100)
+    title = models.CharField("Заголовок", max_length=100, blank=True, null=True)
     user = models.OneToOneField(
         User,
         verbose_name="Пользователь",
@@ -20,7 +20,7 @@ class Blog(models.Model):
     subscribers: Union[Subscription, Manager]
 
     def __str__(self):
-        return self.title
+        return self.user.first_name
 
     class Meta:
         verbose_name = "Блог"
@@ -63,3 +63,17 @@ class Subscription(models.Model):
     class Meta:
         verbose_name = "Подписка"
         verbose_name_plural = "Подписки"
+
+
+class ReadStatus(models.Model):
+    user = models.ForeignKey(
+        User, related_name="read_statuses", on_delete=models.CASCADE
+    )
+    post = models.ForeignKey(
+        Post, related_name="read_statuses", on_delete=models.CASCADE
+    )
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Статус прочтения"
+        verbose_name_plural = "Статусы прочтения"

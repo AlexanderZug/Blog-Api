@@ -89,6 +89,12 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
 
 
 class UserPostSerializer(serializers.ModelSerializer):
+    is_read = serializers.SerializerMethodField()
+
+    def get_is_read(self, obj) -> bool:
+        return obj.read_statuses.filter(user=self.context["request"].user).exists()
+
     class Meta:
         model = Post
-        fields = ["id", "title", "text", "created_at", "blog"]
+        fields = ["id", "title", "text", "created_at", "blog", "is_read"]
+        extra_kwargs = {"created_at": {"format": "%d.%m.%Y"}}

@@ -2,8 +2,12 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.generics import CreateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Blog, Subscription
-from .serializers import SubscriptionCreateSerializer, SubscriptionDeleteSerializer
+from .models import Blog, Post, ReadStatus, Subscription
+from .serializers import (
+    ReadStatusCreateSerializer,
+    SubscriptionCreateSerializer,
+    SubscriptionDeleteSerializer,
+)
 
 
 class SubscriptionCreateView(CreateAPIView):
@@ -40,3 +44,25 @@ class SubscriptionDeleteView(DestroyAPIView):
     )
     def delete(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)
+
+
+class ReadStatusCreateView(CreateAPIView):
+    serializer_class = ReadStatusCreateSerializer
+    queryset = ReadStatus.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        post_id = self.request.data.get("post")
+        post = Post.objects.filter(id=post_id).first()
+        serializer.save(
+            user=self.request.user,
+            post=post,
+        )
+
+    @extend_schema(
+        summary="Create [ReadStatus]",
+        description="Create new read status",
+        responses={201: ReadStatusCreateSerializer},
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
