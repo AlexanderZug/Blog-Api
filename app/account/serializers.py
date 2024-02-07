@@ -84,7 +84,7 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Subscription
-        fields = ["blog", "author"]
+        fields = ["id", "blog", "author"]
 
 
 class UserPostSerializer(serializers.ModelSerializer):

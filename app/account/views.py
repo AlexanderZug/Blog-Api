@@ -11,7 +11,6 @@ from rest_framework.generics import (
 )
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from .models import User, VerifyToken
 from .pagination import UserPostsPagination
@@ -143,22 +142,6 @@ class SignInCreateView(CreateAPIView):
             LoginUserCreateSerializer(verify_token).data,
             status=status.HTTP_200_OK,
         )
-
-
-class SignOutView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    @extend_schema(
-        summary="Sign Out [User]",
-        description="Logout at existed account",
-        responses={
-            200: OpenApiResponse(description="Logout success"),
-            403: OpenApiResponse(description="Not authenticated"),
-        },
-    )
-    def get(self, request, *args, **kwargs):
-        logout(self.request)
-        return Response(status=status.HTTP_200_OK)
 
 
 class UserSubscriptionView(ListAPIView):
