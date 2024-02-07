@@ -81,7 +81,6 @@ class SignViewSerializer(serializers.ModelSerializer):
 
 class UserSubscriptionSerializer(serializers.ModelSerializer):
     author = serializers.CharField(source="blog.user.first_name")
-    blog = serializers.CharField(source="blog.title")
 
     class Meta:
         model = Subscription

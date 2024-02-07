@@ -1,5 +1,6 @@
 # import os
-#
+from celery import shared_task
+
 # from email.mime.text import MIMEText
 # from smtplib import SMTP
 
@@ -39,6 +40,7 @@ class EmailSender:
         print(f"Sending email to {to} with title {title} and message {message}")
 
 
+@shared_task
 def send_email(message, title, to):
     sender = EmailSender()
     return sender.send_email(message, title, to)

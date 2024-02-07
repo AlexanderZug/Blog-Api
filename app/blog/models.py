@@ -8,7 +8,6 @@ from django.db.models import Manager
 
 
 class Blog(models.Model):
-    title = models.CharField("Заголовок", max_length=100, blank=True, null=True)
     user = models.OneToOneField(
         User,
         verbose_name="Пользователь",
@@ -20,7 +19,7 @@ class Blog(models.Model):
     subscribers: Union[Subscription, Manager]
 
     def __str__(self):
-        return self.user.first_name
+        return f"Блог пользователя {self.user.first_name}"
 
     class Meta:
         verbose_name = "Блог"
@@ -60,6 +59,9 @@ class Subscription(models.Model):
         related_name="subscribers",
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return f"Подписка пользователя {self.subscriber.first_name}"
 
     class Meta:
         verbose_name = "Подписка"

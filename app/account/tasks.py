@@ -32,11 +32,11 @@ def send_email_notification() -> None:
         recipient_email = subscription.subscriber.email
 
         subject = "Актуальные посты"
-        message = f"Ваши актуальные посты из блога {subscription.blog.title}:\n\n"
+        message = "Ваши актуальные посты:\n\n"
         for post in recent_posts:
             message += f"- {post.title}\n{post.text}\n\n"
 
-        send_email(
+        send_email.delay(
             message,
             subject,
             recipient_email,
