@@ -29,5 +29,7 @@ This is a Django-based RESTful API project for managing blogs, posts, subscripti
     sudo docker-compose up --build
 ```
 This will create and start the necessary containers.
-It will also create a superuser with the credentials admin/admin and fixtures for testing.
+It will also create a superuser with the credentials admin/admin
+and fixtures for testing.
+
 4. Navigate to the API documentation at http://localhost:8000/api/swagger/
