@@ -1,6 +1,12 @@
 from rest_framework import serializers
 
-from .models import ReadStatus, Subscription
+from .models import Post, ReadStatus, Subscription
+
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = "__all__"
 
 
 class SubscriptionCreateSerializer(serializers.ModelSerializer):
@@ -38,4 +44,10 @@ class ReadStatusCreateSerializer(serializers.ModelSerializer):
         )
         if read_status.exists():
             raise serializers.ValidationError("You have already read this post")
+        subscriber = Subscription.objects.filter(
+            subscriber=self.context["request"].user,
+            blog=validated_data.get("post").blog,
+        )
+        if not subscriber.exists():
+            raise serializers.ValidationError("You are not subscribed to the blog")
         return super().create(validated_data)

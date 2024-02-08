@@ -7,6 +7,7 @@ from .models import Blog, Post, Subscription
 class PostAdmin(admin.ModelAdmin):
     list_display = ["title", "text", "created_at", "blog"]
     list_display_links = ["title", "text"]
+    search_fields = ["title", "text"]
 
     def has_add_permission(self, request):
         return False

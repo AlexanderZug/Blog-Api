@@ -7,6 +7,7 @@ from .settings import *
 load_dotenv(BASE_DIR.parent.parent / ".env")
 
 INSTALLED_APPS += [
+    "test_dump",
     "drf_yasg",
     "rest_framework",
     "drf_spectacular",
@@ -38,16 +39,31 @@ CELERY_RESULT_BACKEND = "redis://redis:6379" + "/0"
 CELERY_BROKER_URL = "redis://redis:6379" + "/0"
 CELERY_CACHE_BACKEND = "default"
 
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("DB_NAME", BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get("DB_USER", "user"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
-        "HOST": os.environ.get("DJANGO_DB_HOST", "localhost"),
-        "PORT": os.environ.get("DJANGO_DB_PORT", "5432"),
+LOCAL_DATABASE = os.environ.get("LOCAL_DATABASE", True)
+
+if LOCAL_DATABASE:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": Path("db.sqlite3"),
+            "USER": os.environ.get("DB_USER", "user"),
+            "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": os.environ.get(
+                "DJANGO_DB_ENGINE", "django.db.backends.postgresql"
+            ),
+            "NAME": os.environ.get("DB_NAME", "postgres"),
+            "USER": os.environ.get("DB_USER", "postgres"),
+            "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
+            "HOST": os.environ.get("DB_HOST", "db"),
+            "PORT": os.environ.get("DB_PORT", "5432"),
+        }
+    }
+
 PROJECT_NAME = "Blog"
 PROJECT_DESCRIPTION = "Blog"
 API_INFO = {
@@ -67,3 +83,18 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
     ],
 }
+
+BOOTSTRAP_SETTINGS = {
+    "ENABLE_LOGS": False,
+    "ENABLE_SKIP_FIELD_REASON_LOGS": False,
+    "ENABLE_SKIP_MODEL_REASON_LOGS": False,
+    "DEFAULT_GENERATOR_CLASS": "bootstrap_new.generators.BaseGenerator",
+    "SKIP_MODELS": [
+        "account.user_groups",
+        "account.user_user_permissions",
+        "auth.group",
+        "auth.permission",
+        "contenttypes.contenttype",
+    ],
+}
+BOOTSTRAP_ENABLED = True

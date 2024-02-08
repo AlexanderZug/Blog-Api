@@ -1,8 +1,3 @@
-#!/bin/bash
-
-python3 manage.py wait_for_db
-python3 manage.py makemigrations
-python3 manage.py migrate
 python3 manage.py shell <<EOF
 import os
 
@@ -21,5 +16,3 @@ try:
 except Exception:
     pass
 EOF
-python3 manage.py make_dump
-python3 manage.py runserver 0.0.0.0:8000

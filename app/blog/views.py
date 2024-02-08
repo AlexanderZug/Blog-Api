@@ -1,9 +1,11 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework.generics import CreateAPIView, DestroyAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import Blog, Post, ReadStatus, Subscription
+from .pagination import PostsPagination
 from .serializers import (
+    PostSerializer,
     ReadStatusCreateSerializer,
     SubscriptionCreateSerializer,
     SubscriptionDeleteSerializer,
@@ -66,3 +68,18 @@ class ReadStatusCreateView(CreateAPIView):
     )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
+
+
+class PostListView(ListAPIView):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+    permission_classes = [AllowAny]
+    pagination_class = PostsPagination
+
+    @extend_schema(
+        summary="Retrieve [Post]",
+        description="Retrieve all posts",
+        responses={200: PostSerializer(many=True)},
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)

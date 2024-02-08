@@ -12,7 +12,19 @@ services:
       - ./app:/app
     depends_on:
       - redis
-
+      - db
+  db:
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-password}
+      - POSTGRES_DB=${DB_NAME:-postgres}
   redis:
     image: redis
     restart: always
+
+volumes:
+  postgres_data:
