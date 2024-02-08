@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Blog, Post, ReadStatus, Subscription
 from .pagination import PostsPagination
 from .serializers import (
+    PostCreateSerializer,
     PostSerializer,
     ReadStatusCreateSerializer,
     SubscriptionCreateSerializer,
@@ -72,7 +73,7 @@ class ReadStatusCreateView(CreateAPIView):
 
 class PostListView(ListAPIView):
     serializer_class = PostSerializer
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by("-created_at")
     permission_classes = [AllowAny]
     pagination_class = PostsPagination
 
@@ -83,3 +84,17 @@ class PostListView(ListAPIView):
     )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
+
+
+class PostCreateView(CreateAPIView):
+    serializer_class = PostCreateSerializer
+    queryset = Post.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    @extend_schema(
+        summary="Create [Post]",
+        description="Create new post",
+        responses={201: PostCreateSerializer},
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)

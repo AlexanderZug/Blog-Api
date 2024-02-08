@@ -9,6 +9,16 @@ class PostSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class PostCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["title", "text"]
+
+    def create(self, validated_data):
+        validated_data["blog"] = self.context["request"].user.blog
+        return super().create(validated_data)
+
+
 class SubscriptionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription

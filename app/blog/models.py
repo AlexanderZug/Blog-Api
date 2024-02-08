@@ -18,7 +18,7 @@ class Blog(models.Model):
     posts: Union[Post, Manager]
     subscribers: Union[Subscription, Manager]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Блог пользователя {self.user.first_name}"
 
     class Meta:
@@ -38,7 +38,7 @@ class Post(models.Model):
     )
     read_statuses: Union[ReadStatus, Manager]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
     class Meta:
@@ -60,7 +60,7 @@ class Subscription(models.Model):
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Подписка пользователя {self.subscriber.first_name}"
 
     class Meta:

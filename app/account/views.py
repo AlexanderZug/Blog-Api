@@ -173,8 +173,8 @@ class UserPostListView(ListAPIView):
         return posts[:500]
 
     @extend_schema(
-        summary="Retrieve [User:subscription]",
-        description="Retrieve user's subscriptions",
+        summary="Retrieve [User:posts by subscription]",
+        description="Retrieve user's posts by subscription",
         responses={200: UserPostSerializer},
     )
     def get(self, request, *args, **kwargs):

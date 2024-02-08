@@ -9,13 +9,13 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ["title", "text"]
     search_fields = ["title", "text"]
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request) -> bool:
         return False
 
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None) -> bool:
         return request.user.is_superuser
 
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj=None) -> bool:
         return False
 
 
@@ -24,13 +24,13 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ["user"]
     list_display_links = ["user"]
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request) -> bool:
         return False
 
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None) -> bool:
         return False
 
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj=None) -> bool:
         return False
 
 
@@ -39,11 +39,11 @@ class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ["subscriber", "blog"]
     list_display_links = ["subscriber", "blog"]
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request) -> bool:
         return False
 
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None) -> bool:
         return request.user.is_superuser
 
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj=None) -> bool:
         return False

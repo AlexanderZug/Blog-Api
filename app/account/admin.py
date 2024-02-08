@@ -17,16 +17,16 @@ class UserAdmin(admin.ModelAdmin):
     list_display_links = ["first_name", "last_name", "email"]
 
     @admin.display(description="Количество постов у пользователя")
-    def get_users_posts(self, obj):
+    def get_users_posts(self, obj) -> int:
         return obj.blog.posts.count()
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request) -> bool:
         return request.user.is_superuser
 
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None) -> bool:
         return request.user.is_superuser
 
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj=None) -> bool:
         return request.user.is_superuser
 
 

@@ -27,7 +27,7 @@ class User(AbstractUser):
     verify_tokens: Union[VerifyToken, Manager]
     read_statuses: Union[ReadStatus, Manager]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.first_name
 
     class Meta:
@@ -63,7 +63,7 @@ class VerifyToken(models.Model):
     def email_expired(self) -> bool:
         return self.activation_date + datetime.timedelta(hours=1) < timezone.now()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.email
 
     class Meta:
