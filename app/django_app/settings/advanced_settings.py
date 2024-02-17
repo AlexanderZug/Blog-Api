@@ -31,7 +31,7 @@ TIME_ZONE = "Europe/Berlin"
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "secret_key")
 
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = os.environ.get("DEBUG", False)
 ALLOWED_HOSTS = [os.environ.get("DJANGO_ALLOWED_HOSTS", "*")]
 
 # Celery Configuration Options
