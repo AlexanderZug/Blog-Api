@@ -23,10 +23,10 @@ This is a Django-based RESTful API project for managing blogs, posts, subscripti
 ```
     cd Blog-Api
 ```
-3. Run Docker Compose to start the API, Redis, and Postgres:
+3. Start the API, Redis, and Postgres:
 
 ```
-    sudo docker-compose up --build
+    make run-local
 ```
 This will create and start the necessary containers.
 It will also create a superuser with the credentials admin/admin

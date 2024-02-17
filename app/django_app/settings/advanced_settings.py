@@ -39,7 +39,7 @@ CELERY_RESULT_BACKEND = "redis://redis:6379" + "/0"
 CELERY_BROKER_URL = "redis://redis:6379" + "/0"
 CELERY_CACHE_BACKEND = "default"
 
-LOCAL_DATABASE = os.environ.get("LOCAL_DATABASE", True)
+LOCAL_DATABASE = os.environ.get("LOCAL_DATABASE", False)
 
 if LOCAL_DATABASE:
     DATABASES = {
