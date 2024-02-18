@@ -83,18 +83,3 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
     ],
 }
-
-BOOTSTRAP_SETTINGS = {
-    "ENABLE_LOGS": False,
-    "ENABLE_SKIP_FIELD_REASON_LOGS": False,
-    "ENABLE_SKIP_MODEL_REASON_LOGS": False,
-    "DEFAULT_GENERATOR_CLASS": "bootstrap_new.generators.BaseGenerator",
-    "SKIP_MODELS": [
-        "account.user_groups",
-        "account.user_user_permissions",
-        "auth.group",
-        "auth.permission",
-        "contenttypes.contenttype",
-    ],
-}
-BOOTSTRAP_ENABLED = True
