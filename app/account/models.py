@@ -28,7 +28,7 @@ class User(AbstractUser):
     read_statuses: Union[ReadStatus, Manager]
 
     def __str__(self) -> str:
-        return self.first_name
+        return str(self.first_name)
 
     class Meta:
         verbose_name = "Пользователь"
@@ -64,7 +64,7 @@ class VerifyToken(models.Model):
         return self.activation_date + datetime.timedelta(hours=1) < timezone.now()
 
     def __str__(self) -> str:
-        return self.email
+        return str(self.email)
 
     class Meta:
         verbose_name = "Токен"
