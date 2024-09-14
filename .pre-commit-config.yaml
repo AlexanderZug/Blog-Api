@@ -1,21 +1,15 @@
 default_language_version:
-  python: python3.11
+  python: python3.12
 repos:
-  - repo: https://github.com/psf/black
-    rev: 22.3.0
-    hooks:
-      - id: black
-        language_version: python3.11
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
         exclude: ^templates/templated_email/compiled/
-        exclude_types: [svg]
+        exclude_types: [ svg ]
       - id: end-of-file-fixer
         exclude: ^templates/templated_email/compiled/
-        exclude_types: [svg]
+        exclude_types: [ svg ]
       - id: check-added-large-files # prevents giant files from being committed.
       - id: check-case-conflict # checks for files that would conflict in case-insensitive filesystems.
       - id: check-merge-conflict # checks for files that contain merge conflict strings.
@@ -24,30 +18,15 @@ repos:
       - id: fix-byte-order-marker # removes utf-8 byte order marker.
       - id: mixed-line-ending # replaces or checks mixed line ending.
 
-  - repo: https://github.com/pycqa/flake8
-    rev: 3.9.2
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.5
     hooks:
-      - id: flake8
-        exclude: migrations|apps
-
-  - repo: https://github.com/asottile/seed-isort-config
-    rev: v2.2.0
-    hooks:
-      - id: seed-isort-config
-
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.10.1
-    hooks:
-      - id: isort
-        args: ["--profile", "black"]
-
-  - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: "v2.0.4"
-    hooks:
-      - id: autopep8
+      - id: ruff
+      - id: ruff-format
+        args: [ "--diff" ]
 
   - repo: https://github.com/python-poetry/poetry
-    rev: "1.4.1"
+    rev: "1.8.0"
     hooks:
       - id: poetry-export
         args:
@@ -59,11 +38,9 @@ repos:
             "--without-hashes",
           ]
 
-  - repo: local
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
     hooks:
-      - id: migrations-check
-        language: system
-        name: Check for uncreated migrations.
-        entry: sh -c "./manage.py makemigrations --check --dry-run"
-        files: "models\\.py$"
-        stages: [commit]
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace

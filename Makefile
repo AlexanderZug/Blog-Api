@@ -19,7 +19,6 @@ include makefiles/*
 help: help_python help_git help_docker_base
 	@echo ""
 	@echo "------------------------ Configmaster --------------------------------"
-	@echo "make setup -------------------- Setup the whole project for development"
 	@echo "make setupdb ------------------ Setup development database"
 	@echo "make run-dev ------------------ Run the development environment in docker"
 	@echo ""
@@ -46,9 +45,6 @@ clean:
 		.pytest_cache/ \
 		cov/
 	@find . -type d -name "__pycache__" -prune -exec rm -rf "{}" \;
-
-setup: venv-install setupdb
-	@echo "executing target setup"
 
 setupdb:
 	@echo "executing target setupdb"
