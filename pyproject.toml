@@ -33,12 +33,12 @@ line-length = 120
 [tool.ruff.lint]
 select = [
     "UP", # pyupgrade
-    "B", # flake8-bugbear
-    "F", # pyflakes
-    "E", # pycodestyle
+    "B",  # flake8-bugbear
+    "F",  # pyflakes
+    "E",  # pycodestyle
     "DJ", # flake8-django
-    "I", # isort
-    "N", # pep8-naming
+    "I",  # isort
+    "N",  # pep8-naming
     "C4", # flake8-comprehensions
 ]
 
