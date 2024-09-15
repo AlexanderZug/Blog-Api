@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from account.models import User
 from django.db import models
 from django.db.models import Manager
@@ -15,15 +13,15 @@ class Blog(models.Model):
         on_delete=models.CASCADE,
         help_text="Пользователь может иметь только один блог",
     )
-    posts: Union[Post, Manager]
-    subscribers: Union[Subscription, Manager]
-
-    def __str__(self) -> str:
-        return f"Блог пользователя {self.user.first_name}"
+    posts: Post | Manager
+    subscribers: Subscription | Manager
 
     class Meta:
         verbose_name = "Блог"
         verbose_name_plural = "Блоги"
+
+    def __str__(self) -> str:
+        return f"Блог пользователя {self.user.first_name}"
 
 
 class Post(models.Model):
@@ -36,14 +34,14 @@ class Post(models.Model):
         related_name="posts",
         on_delete=models.CASCADE,
     )
-    read_statuses: Union[ReadStatus, Manager]
-
-    def __str__(self) -> str:
-        return self.title
+    read_statuses: ReadStatus | Manager
 
     class Meta:
         verbose_name = "Пост"
         verbose_name_plural = "Посты"
+
+    def __str__(self) -> str:
+        return self.title
 
 
 class Subscription(models.Model):
@@ -60,23 +58,30 @@ class Subscription(models.Model):
         on_delete=models.CASCADE,
     )
 
-    def __str__(self) -> str:
-        return f"Подписка пользователя {self.subscriber.first_name}"
-
     class Meta:
         verbose_name = "Подписка"
         verbose_name_plural = "Подписки"
 
+    def __str__(self) -> str:
+        return f"Подписка пользователя {self.subscriber.first_name}"
+
 
 class ReadStatus(models.Model):
     user = models.ForeignKey(
-        User, related_name="read_statuses", on_delete=models.CASCADE
+        User,
+        related_name="read_statuses",
+        on_delete=models.CASCADE,
     )
     post = models.ForeignKey(
-        Post, related_name="read_statuses", on_delete=models.CASCADE
+        Post,
+        related_name="read_statuses",
+        on_delete=models.CASCADE,
     )
     is_read = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Статус прочтения"
         verbose_name_plural = "Статусы прочтения"
+
+    def __str__(self) -> str:
+        return str(self.user.username)

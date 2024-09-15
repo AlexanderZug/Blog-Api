@@ -7,4 +7,4 @@ class AccountConfig(AppConfig):
     verbose_name = "Пользователи"
 
     def ready(self):
-        pass
+        import account.signals  # noqa

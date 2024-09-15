@@ -15,7 +15,7 @@ class Command(BaseCommand):
         users = []
         num_users_to_generate = 100
         num_posts_per_user = 5
-        for i in range(num_users_to_generate):
+        for _ in range(num_users_to_generate):
             user = User.objects.create(
                 first_name=mimesis.Person().first_name(),
                 last_name=mimesis.Person().surname(),
@@ -29,15 +29,20 @@ class Command(BaseCommand):
                 title = f"Post Title {random.randint(1, 100)}"
                 text = f"Post Text {random.randint(1, 100)}"
                 created_at = timezone.now() - timedelta(days=random.randint(1, 365))
-                Post.objects.create(
-                    title=title, text=text, created_at=created_at, blog=user.blog
-                )
+                if hasattr(user, "blog"):
+                    Post.objects.create(
+                        title=title,
+                        text=text,
+                        created_at=created_at,
+                        blog=user.blog,
+                    )
 
             other_users = [u for u in users if u != user]
             num_subscriptions = random.randint(1, 5)
             for _ in range(num_subscriptions):
                 subscriber = random.choice(other_users)
-                Subscription.objects.create(subscriber=subscriber, blog=user.blog)
+                if hasattr(user, "blog"):
+                    Subscription.objects.create(subscriber=subscriber, blog=user.blog)
 
         for user in users:
             subscriptions = Subscription.objects.filter(subscriber=user)
@@ -46,7 +51,4 @@ class Command(BaseCommand):
                 for post in posts:
                     if random.random() < 0.5:
                         ReadStatus.objects.create(user=user, post=post, is_read=True)
-
-        self.stdout.write(
-            self.style.SUCCESS("Test data generation completed successfully")
-        )
+        self.stdout.write(self.style.SUCCESS("Test data generation completed successfully"))
