@@ -6,22 +6,22 @@ authors = ["AlexanderZug <alexandertsygankov.unterwegs@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "4.2.9"
-djangorestframework = "^3.14.0"
+django = "5.0.9"
+djangorestframework = "^3.15.2"
 drf-yasg = "^1.21.7"
 python-dotenv = "^1.0.1"
 drf-spectacular = "^0.27.1"
-django-grappelli = "^3.0.8"
-mimesis = "^14.0.0"
-celery = "^5.3.6"
-redis = "^5.0.1"
-django-celery-beat = "^2.5.0"
+django-grappelli = "^4.0.1"
+mimesis = "^18.0.0"
+celery = "^5.4.0"
+redis = "^5.1.1"
+django-celery-beat = "^2.7.0"
 psycopg2-binary = "^2.9.9"
 
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.6.0"
-ruff = "^0.6.5"
+pre-commit = "^4.0.0"
+ruff = "^0.6.9"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
