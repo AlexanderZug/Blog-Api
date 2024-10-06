@@ -52,7 +52,7 @@ setupdb:
 
 run-dev:
 	@echo "executing target run-dev"
-	@echo "some docker-compose voodoo here"
+	@echo "some docker compose voodoo here"
 
 #
 # docker run targets
