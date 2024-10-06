@@ -53,9 +53,7 @@ if LOCAL_DATABASE:
 else:
     DATABASES = {
         "default": {
-            "ENGINE": os.environ.get(
-                "DJANGO_DB_ENGINE", "django.db.backends.postgresql"
-            ),
+            "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "django.db.backends.postgresql"),
             "NAME": os.environ.get("DB_NAME", "postgres"),
             "USER": os.environ.get("DB_USER", "postgres"),
             "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
@@ -83,3 +81,5 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
     ],
 }
+
+GRAPPELLI_INDEX_DASHBOARD = "django_app.dashboard.CustomIndexDashboard"
