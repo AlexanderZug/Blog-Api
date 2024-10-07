@@ -1,5 +1,5 @@
 from blog.models import Post
-from django.contrib.auth import login, logout
+from django.contrib.auth import get_user_model, login, logout
 from django.middleware.csrf import get_token
 from drf_spectacular.utils import OpenApiResponse, extend_schema
 from rest_framework import status
@@ -12,7 +12,7 @@ from rest_framework.generics import (
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from .models import User, VerifyToken
+from .models import VerifyToken
 from .pagination import UserPostsPagination
 from .serializers import (
     LoginUserCreateSerializer,
@@ -23,6 +23,8 @@ from .serializers import (
     UserSubscriptionSerializer,
     VerifyTokenCreateSerializer,
 )
+
+User = get_user_model()
 
 
 class SignView(RetrieveAPIView):

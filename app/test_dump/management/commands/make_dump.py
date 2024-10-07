@@ -2,10 +2,12 @@ import random
 from datetime import timedelta
 
 import mimesis
-from account.models import User
 from blog.models import Post, ReadStatus, Subscription
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.utils import timezone
+
+User = get_user_model()
 
 
 class Command(BaseCommand):

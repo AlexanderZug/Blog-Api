@@ -2,9 +2,12 @@ import uuid
 
 import mimesis
 from blog.models import Post, Subscription
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .models import User, VerifyToken
+from .models import VerifyToken
+
+User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
