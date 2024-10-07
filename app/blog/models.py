@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from account.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Manager
+
+User = get_user_model()
 
 
 class Blog(models.Model):
