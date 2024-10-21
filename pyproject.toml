@@ -6,25 +6,25 @@ authors = ["AlexanderZug <alexandertsygankov.unterwegs@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "^5.1.1"
+django = "^5.1.2"
 djangorestframework = "^3.15.2"
-drf-yasg = "^1.21.7"
+drf-yasg = "^1.21.8"
 python-dotenv = "^1.0.1"
 drf-spectacular = "^0.27.1"
 django-grappelli = "^4.0.1"
 celery = "^5.4.0"
 redis = "^5.1.1"
 django-celery-beat = "^2.7.0"
-psycopg2-binary = "^2.9.9"
+psycopg2-binary = "^2.9.10"
 mimesis = "^18.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^4.0.0"
-ruff = "^0.6.9"
 mypy = "^1.12.1"
 django-stubs = "^5.1.0"
 djangorestframework-stubs = "^3.15.1"
+pre-commit = "^4.0.1"
+ruff = "^0.7.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -35,14 +35,14 @@ line-length = 120
 
 [tool.ruff.lint]
 select = [
-	"UP", # pyupgrade
-	"B", # flake8-bugbear
-	"F", # pyflakes
-	"E", # pycodestyle
-	"DJ", # flake8-django
-	"I", # isort
-	"N", # pep8-naming
-	"C4", # flake8-comprehensions
+    "UP", # pyupgrade
+    "B",  # flake8-bugbear
+    "F",  # pyflakes
+    "E",  # pycodestyle
+    "DJ", # flake8-django
+    "I",  # isort
+    "N",  # pep8-naming
+    "C4", # flake8-comprehensions
 ]
 
 ignore = [
