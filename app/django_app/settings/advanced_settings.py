@@ -38,28 +38,16 @@ CELERY_RESULT_BACKEND = "redis://redis:6379" + "/0"
 CELERY_BROKER_URL = "redis://redis:6379" + "/0"
 CELERY_CACHE_BACKEND = "default"
 
-LOCAL_DATABASE = os.environ.get("LOCAL_DATABASE", False)
-
-if LOCAL_DATABASE:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": Path("db.sqlite3"),
-            "USER": os.environ.get("DB_USER", "user"),
-            "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.environ.get("DB_NAME", "postgres"),
+        "USER": os.environ.get("DB_USER", "postgres"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
+        "HOST": os.environ.get("DB_HOST", "db"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "django.db.backends.postgresql"),
-            "NAME": os.environ.get("DB_NAME", "postgres"),
-            "USER": os.environ.get("DB_USER", "postgres"),
-            "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
-            "HOST": os.environ.get("DB_HOST", "db"),
-            "PORT": os.environ.get("DB_PORT", "5432"),
-        }
-    }
+}
 
 PROJECT_NAME = "Blog"
 PROJECT_DESCRIPTION = "Blog"

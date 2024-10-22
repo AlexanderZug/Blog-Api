@@ -25,6 +25,7 @@ ruff = "^0.6.9"
 mypy = "^1.12.1"
 django-stubs = "^5.1.0"
 djangorestframework-stubs = "^3.15.1"
+pytest-django = "^4.9.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -64,4 +65,8 @@ exclude = [
 ]
 
 [tool.django-stubs]
-django_settings_module = "app.django_app.settings"
+django_settings_module = "django_app.settings"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "django_app.settings.settings_test"
+python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]

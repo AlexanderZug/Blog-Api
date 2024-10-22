@@ -73,10 +73,15 @@ mypy:
 	@echo "executing target mypy"
 	@mypy ${APPFOLDER}/
 
+run-test:
+	@echo "executing target run-test"
+	@pytest -v ${APPFOLDER}
+
 .ONESHELL:
 test:
 	@echo "executing target test"
 	FAILED=0
 	${MAKE} -s lint || FAILED=1
 	${MAKE} -s mypy || FAILED=1
+	${MAKE} -s run-test || FAILED=1
 	exit  $$FAILED
