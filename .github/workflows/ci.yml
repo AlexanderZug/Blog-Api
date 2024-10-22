@@ -15,8 +15,7 @@ jobs:
           pip install poetry
           poetry install
       - name: Run Ruff
-        run: ruff check --output-format=github .
+        run: poetry run ruff check --output-format=github .
       - name: Test with pytest
         run: |
-          pip install pytest
-          pytest -v app/
+          poetry run pytest -v app/
