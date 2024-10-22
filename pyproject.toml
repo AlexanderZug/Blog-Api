@@ -6,7 +6,7 @@ authors = ["AlexanderZug <alexandertsygankov.unterwegs@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "5.1.2"
+django = "^5.1.1"
 djangorestframework = "^3.15.2"
 drf-yasg = "^1.21.7"
 python-dotenv = "^1.0.1"
@@ -20,8 +20,11 @@ mimesis = "^18.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^4.0.1"
+pre-commit = "^4.0.0"
 ruff = "^0.6.9"
+mypy = "^1.12.1"
+django-stubs = "^5.1.0"
+djangorestframework-stubs = "^3.15.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -32,22 +35,33 @@ line-length = 120
 
 [tool.ruff.lint]
 select = [
-    "UP", # pyupgrade
-    "B",  # flake8-bugbear
-    "F",  # pyflakes
-    "E",  # pycodestyle
-    "DJ", # flake8-django
-    "I",  # isort
-    "N",  # pep8-naming
-    "C4", # flake8-comprehensions
+	"UP", # pyupgrade
+	"B", # flake8-bugbear
+	"F", # pyflakes
+	"E", # pycodestyle
+	"DJ", # flake8-django
+	"I", # isort
+	"N", # pep8-naming
+	"C4", # flake8-comprehensions
 ]
 
 ignore = [
-    "DJ007", # Do not use __all__ with ModelForm, use fields instead
+	"DJ007", # Do not use __all__ with ModelForm, use fields instead
 ]
 
 exclude = [
-    "app/*/migrations/*",
-    "app/django_app/settings/*",
-    "app/*/__init__.py",
+	"app/*/migrations/*",
+	"app/django_app/settings/*",
+	"app/*/__init__.py",
 ]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+exclude = [
+	"migrations",
+	"app/django_app/settings/*",
+	"app/*/__init__.py",
+]
+
+[tool.django-stubs]
+django_settings_module = "app.django_app.settings"

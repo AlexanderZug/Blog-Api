@@ -7,14 +7,13 @@ from .settings import *
 load_dotenv(BASE_DIR.parent.parent / ".env")
 
 INSTALLED_APPS += [
-    "test_dump",
     "drf_yasg",
     "rest_framework",
     "drf_spectacular",
     "django_celery_beat",
 ]
 
-FRONTEND_MODULES = ["api", "blog", "account"]
+FRONTEND_MODULES = ["api.apps.ApiConfig", "blog.apps.BlogConfig", "account.apps.AccountConfig", "test_dump"]
 
 INSTALLED_APPS += FRONTEND_MODULES
 
