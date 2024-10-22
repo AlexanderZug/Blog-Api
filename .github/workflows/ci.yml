@@ -1,4 +1,4 @@
-name: CI
+name: Blog-API-CI
 on: push
 jobs:
   build:
@@ -17,5 +17,5 @@ jobs:
         run: ruff check --output-format=github .
       - name: Test with pytest
         run: |
-          pip install pytest pytest-cov
-          pytest app/
+          pip install pytest
+          pytest -v .
