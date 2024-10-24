@@ -1,31 +1,8 @@
 import uuid
 
-import pytest
+from blog.models import Subscription
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APIClient
-
-from .models import Subscription
-
-
-@pytest.fixture
-def api_client():
-    def _callable(user=None):
-        client = APIClient()
-        if user:
-            client.force_authenticate(user=user)
-        return client
-
-    return _callable
-
-
-@pytest.fixture
-def authenticated_user(django_user_model):
-    return django_user_model.objects.create_user(
-        username=str(uuid.uuid4()),
-        password=str(uuid.uuid4()),
-        email="test@test.com",
-    )
 
 
 def test_subscription_create_view_success(django_user_model, api_client, authenticated_user):

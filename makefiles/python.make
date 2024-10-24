@@ -75,7 +75,7 @@ mypy:
 
 run-test:
 	@echo "executing target run-test"
-	@pytest -v ${APPFOLDER}
+	@pytest -v ${APPFOLDER}/tests
 
 .ONESHELL:
 test:
