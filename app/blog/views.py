@@ -1,5 +1,5 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView, get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import Blog, Post, ReadStatus, Subscription
@@ -20,7 +20,7 @@ class SubscriptionCreateView(CreateAPIView):
 
     def perform_create(self, serializer):
         blog_id = self.request.data.get("blog")
-        blog = Blog.objects.filter(id=blog_id).first()
+        blog = get_object_or_404(Blog, id=blog_id)
         serializer.save(
             subscriber=self.request.user,
             blog=blog,
@@ -56,7 +56,7 @@ class ReadStatusCreateView(CreateAPIView):
 
     def perform_create(self, serializer):
         post_id = self.request.data.get("post")
-        post = Post.objects.filter(id=post_id).first()
+        post = get_object_or_404(Post, id=post_id)
         serializer.save(
             user=self.request.user,
             post=post,

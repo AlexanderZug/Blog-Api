@@ -9,9 +9,9 @@ from .views import (
 )
 
 urlpatterns = [
-    path("posts/", PostListView.as_view()),
-    path("new/post/", PostCreateView.as_view()),
+    path("posts/", PostListView.as_view(), name="post-list"),
+    path("new/post/", PostCreateView.as_view(), name="post-create"),
     path("subscribe/", SubscriptionCreateView.as_view(), name="subscription-create"),
-    path("unsubscribe/<int:pk>/", SubscriptionDeleteView.as_view()),
-    path("is/read/", ReadStatusCreateView.as_view()),
+    path("unsubscribe/<int:pk>/", SubscriptionDeleteView.as_view(), name="unsubscribe-delete"),
+    path("is/read/", ReadStatusCreateView.as_view(), name="read-status-create"),
 ]
