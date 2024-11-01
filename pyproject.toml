@@ -13,7 +13,7 @@ python-dotenv = "^1.0.1"
 drf-spectacular = "^0.27.1"
 django-grappelli = "^4.0.1"
 celery = "^5.4.0"
-redis = "^5.2.0"
+redis = "^5.1.1"
 django-celery-beat = "^2.7.0"
 psycopg2-binary = "^2.9.9"
 mimesis = "^18.0.0"
@@ -21,9 +21,9 @@ mimesis = "^18.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.0"
-ruff = "^0.7.1"
-mypy = "^1.13.0"
-django-stubs = "^5.1.1"
+ruff = "^0.7.0"
+mypy = "^1.12.1"
+django-stubs = "^5.1.0"
 djangorestframework-stubs = "^3.15.1"
 pytest-django = "^4.9.0"
 pytest-cov = "^5.0.0"
@@ -69,6 +69,6 @@ exclude = [
 django_settings_module = "django_app.settings"
 
 [tool.pytest.ini_options]
-django_settings_module = "django_app.settings.settings_test"
+DJANGO_SETTINGS_MODULE = "django_app.settings.settings_test"
 python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 addopts = ["--cov=app"]
