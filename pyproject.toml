@@ -21,7 +21,7 @@ mimesis = "^18.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.2.0"
-ruff = "^0.11.10"
+ruff = "^0.11.11"
 mypy = "^1.15.0"
 django-stubs = "^5.2.0"
 djangorestframework-stubs = "^3.16.0"
