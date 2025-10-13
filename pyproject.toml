@@ -15,15 +15,15 @@ django-grappelli = "^4.0.2"
 celery = "^5.5.3"
 redis = "^6.4.0"
 django-celery-beat = "^2.8.1"
-psycopg2-binary = "^2.9.9"
+psycopg2-binary = "^2.9.11"
 mimesis = "^18.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.3.0"
-ruff = "^0.13.3"
+ruff = "^0.14.0"
 mypy = "^1.18.2"
-django-stubs = "^5.2.6"
+django-stubs = "^5.2.7"
 djangorestframework-stubs = "^3.16.4"
 pytest-django = "^4.11.1"
 pytest-cov = "^7.0.0"
