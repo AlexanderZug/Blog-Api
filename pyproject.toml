@@ -6,25 +6,25 @@ authors = ["AlexanderZug <alexandertsygankov.unterwegs@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "^5.2.7"
+django = "^5.2.8"
 djangorestframework = "^3.16.1"
 drf-yasg = "^1.21.11"
-python-dotenv = "^1.1.1"
-drf-spectacular = "^0.28.0"
+python-dotenv = "^1.2.1"
+drf-spectacular = "^0.29.0"
 django-grappelli = "^4.0.2"
 celery = "^5.5.3"
-redis = "^6.4.0"
+redis = "^7.1.0"
 django-celery-beat = "^2.8.1"
 psycopg2-binary = "^2.9.11"
 mimesis = "^18.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^4.3.0"
-ruff = "^0.14.1"
+pre-commit = "^4.5.0"
+ruff = "^0.14.6"
 mypy = "^1.18.2"
 django-stubs = "^5.2.7"
-djangorestframework-stubs = "^3.16.4"
+djangorestframework-stubs = "^3.16.5"
 pytest-django = "^4.11.1"
 pytest-cov = "^7.0.0"
 
